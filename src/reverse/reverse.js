@@ -37,6 +37,22 @@ function reverseIterative(list) {
  * @returns {LinkedList}
  * A linked list in reverse order
  */
-function reverseRecursive(list) {}
+function reverseRecursive(list) {
+    
+    function reverseNode(node) {
+    // base case: return last node as new head
+    if (!node || !node.next) return node;
+
+    const newHead = reverseNode(node.next);
+    node.next.next = node;
+    node.next = null;
+    return newHead;
+  }
+
+  const reversedHead = reverseNode(list.head);
+  const reversedList = new LinkedList(); // assumes you have a LinkedList class
+  reversedList.head = reversedHead;
+  return reversedList;
+}
 
 module.exports = { reverseIterative, reverseRecursive };
